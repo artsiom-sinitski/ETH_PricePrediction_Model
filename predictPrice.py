@@ -11,7 +11,6 @@ batch_size=5 = 5 predictions, etc...
 Have a look at train.py for informations about
 what the value of batch_size should be.
 """
-
 import os
 
 from keras.models import Sequential, load_model
@@ -22,15 +21,16 @@ import configRes
 import numpy as np
 
 
-# [Open,High,Low,Close(t),Volume], Close (t+1)
-to_predict=[[296.94,298.19,288.00,288.95,8350500], 280.74]
+# [ [Open, High, Low, Close(t), Volume], Close(t+1) ]
+to_predict = [[296.94,298.19,288.00,288.95,8350500], 280.74]
 # this is the same as input_shape to our LSTM models
 # (num of past days of data to use, num of metrics to use)
-data_shape=(1,5)
+data_shape = (1, 5)
+
 
 if __name__ == '__main__':
-    # Get comman line params.
-    name, epochs, batches, _ = get_params(script='predict.py')
+    # Get command line params.
+    name, epochs, batches, _ = get_params(script='predictPrice.py')
     model = confs[name]
     mname = 'models/model-%s-%d-%d.h5' % (name, epochs, batches)
     # Loading the model.
