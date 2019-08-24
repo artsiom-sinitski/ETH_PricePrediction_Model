@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Train and test our prediction model.
-The data is 1 year wroth of ETH prices:
+The data is 1 year period of ETH prices:
 from July 14th, 2018 - August 13th, 2019. 
 
 Note:
@@ -39,7 +39,7 @@ def get_lstm(batches, input_shape):
     sequences from previous epochs which in practice
     means that we should learn "better" and faster.
 
-    input_shape = (# of past data to look for, # of metrics)
+    input_shape = (# of past data to look at, # of features)
     This argument is required if using LSTM as the first layer
     in a model.
 
@@ -62,8 +62,9 @@ def train_model(name, train_x, train_y, epochs, batches, test_x, test_y):
     model = mparams['model'](batches, (train_x.shape[1], train_x.shape[2]))
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mse', 'mape'])
 
-    # Since the stateful LSTM is learning dependencies between data points we want
-    # keep the data in the same order on each epoch, thus we don't want to shuffle it.
+    # Since the stateful LSTM is learning dependencies between data points 
+    # we want to keep the data in the same order on each iteration,
+    # thus we don't want to shuffle it.
     history = model.fit(train_x, train_y, verbose=2, epochs=epochs, batch_size=batches, validation_data=(test_x, test_y), shuffle=False)
 
     return model, name, mparams, history
@@ -111,8 +112,8 @@ if __name__ == '__main__':
     # Test our model on both data that has been seen
     # (training data set) and unseen (test data set)
     print("----- Scores for %s model -----" % title)
-    # Notice that we need to specify batch_size in evaluate when we're
-    # using LSTM.
+    # Notice that we need to specify 'batch_size" in the
+    # evaluate() function when we're using an LSTM layer.
     train_score = model.evaluate(train_x, train_y, verbose=0, batch_size=batches)
     trscore = "| RMSE: $%s | MAPE: %.0f%%" % ("{:,.0f}".format(math.sqrt(train_score[0])), train_score[2])
     print("Train Score %s" % trscore)

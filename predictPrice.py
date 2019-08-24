@@ -23,12 +23,13 @@ import numpy as np
 # Below I am using real ETH price data from 07-22-2018.
 # [ [Open, High, Low, Close(t), Volume], Close(t+1) ]
 to_predict = [
-               [461.04, 471.99, 455.01, 457.65, 10271619], 449.63
+               [461.04, 471.99, 455.01, 457.65, 102716195], 449.63
+             # [457.65, 469.70,	446.61,	449.63, 175179390], 479.47
              ]
 
 # this is the same as input_shape to our LSTM model.
 # (num. of past days of data to use, num. of features to use)
-data_shape = (2, 5)
+data_shape = (1, 5)
 
 
 if __name__ == '__main__':
@@ -44,6 +45,7 @@ if __name__ == '__main__':
     else:
         print("Can't find %s model, train it first using 'trainModel.py %s %d %d'" % (mname, name, epochs, batches))
 
+    # conacatenate feature arrays for Day_10 & Day_11
     p = np.array(to_predict[0])
     # Convert data into the "right" format.
     p = np.reshape(p, (batches, data_shape[0], data_shape[1]))

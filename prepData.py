@@ -102,7 +102,8 @@ def split_train_test(X, Y, trs_len=0.80):
               20% of the data will be used for testing.
     """
     lx = len(X)
-    trs = int(lx * trs_len)
+    # train set will have 315 examples, test - 80
+    trs = int(lx * trs_len) - 1
     train_x, train_y = X[:trs], Y[:trs]
     test_x, test_y = X[trs:], Y[trs:]
     return train_x, train_y, test_x, test_y
