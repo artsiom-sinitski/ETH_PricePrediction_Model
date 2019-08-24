@@ -52,7 +52,8 @@ def get_vpo(values):
 
     If we want to train our network to predict Day_1
     we don't have any data from the previous day, so we can't
-    do that, we base prediction of m23 from the metrics from prev data: m11,m12,m13 and we can do the same for Day_2:
+    do that, we base prediction of m23 on metrics from prev data:
+    [m11, m12, m13] and we can do the same for Day_2:
 
     X: m11,m12,m13 Y: m23
     X: m21,m22,m23 Y: m33
@@ -62,10 +63,10 @@ def get_vpo(values):
     from Day_3.
 
     So, this is how we're constructing our data:
-    X: No data      Y: m13 <- We discard this first value,
-    X: m11,m12,m13  Y: m23    since we don't have any X data from Day_0
+    X: No data      Y: m13     <- We discard this first value,
+    X: m11,m12,m13  Y: m23        since we don't have any X data from Day_0
     X: m21,m22,m23  Y: m33
-    X: m31,m32,m32  Y: No data <- We need to discard this as well, since there's no data for Y from Day_4
+    X: m31,m32,m32  Y: No data <- We need to discard this as well, since                                 there's no data for Y from Day_4
     """
     shifted_y = list(values)
     shifted_y.pop(0)
@@ -76,9 +77,9 @@ def get_vpo(values):
 def prep_data(train_x, train_y):
     """
     Split data and return in the exact format
-    we need it  for our LSTM to learn
+    we need it for our LSTM to learn
     """
-    train_x, train_y, test_x, test_y = train_test_split(train_x, train_y)
+    train_x, train_y, test_x, test_y = split_train_test(train_x, train_y)
 
     # We need one more dimension (we need to put our values
     # into one more list) for our x values
@@ -92,7 +93,7 @@ def prep_data(train_x, train_y):
     return train_x, train_y, test_x, test_y
 
 
-def train_test_split(X, Y, trs_len=0.80):
+def split_train_test(X, Y, trs_len=0.80):
     """
     Split both X and Y into train and test sets.
 
@@ -109,7 +110,7 @@ def train_test_split(X, Y, trs_len=0.80):
 
 if __name__ == '__main__':
     # Here we want to first show how the "shifting" works
-    # then plot a part of our train and test data.
+    # then graph our training and test data.
     data = pd.read_csv('data/ETH-USD_prices.csv')
     x, y = get_raw_xy(data)
     yy = get_vpo(y)
@@ -122,7 +123,7 @@ if __name__ == '__main__':
     for i in range(5):
         print('X[%d]/YY[%d]\n' % (i, i), x[i], ' ==> ', yy[i])
 
-    train_x, train_y, test_x, test_y=train_test_split(x, yy)
+    train_x, train_y, test_x, test_y = split_train_test(x, yy)
 
     # Prepare data for plotting.
     p_tx = list(train_x[:, 3]) + [None]*(len(test_x))
@@ -133,7 +134,9 @@ if __name__ == '__main__':
     pyplot.plot(p_ttx, label='test_x')
     pyplot.legend()
     pyplot.show()
+
     x, y = get_data()
+
     print("\n----- Data before preparation -----")
     print(x[0], ' ==> ', y[0])
     print("\n----- Data after preparation -----")
