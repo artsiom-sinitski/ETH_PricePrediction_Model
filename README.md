@@ -50,7 +50,7 @@ $> python predictPrice.py default 120 1
 
 | <a href="https://github.com/artsiom-sinitski" target="_blank">**Artsiom Sinitski**</a> |
 | :---: |
-| [![FVCproductions](https://github.com/artsiom-sinitski)](https://github.com/artsiom-sinitski)|
+| [![Artsiom Sinitski](https://github.com/artsiom-sinitski)](https://github.com/artsiom-sinitski)|
 | <a href="https://github.com/artsiom-sinitski" target="_blank">`github.com/artsiom-sinitski`</a> |
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
