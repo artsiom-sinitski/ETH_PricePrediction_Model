@@ -39,10 +39,9 @@ $> python prepData.py
 ```
 $> python trainModel.py default 120 1
 ```
-
-      'default' is the name of your model  
-      '120' is the number of epochs for training  
-      '1' is number of batches  
+       'default' is the name of your model  
+       '120' is the number of epochs for training  
+       '1' is number of batches  
 
 - Third, make the model predict by running from the command line:
 ```
@@ -54,8 +53,6 @@ $> python predictPrice.py default 120 1
 | :---: |
 | [![Artsiom Sinitski](https://github.com/artsiom-sinitski)](https://github.com/artsiom-sinitski)|
 | <a href="https://github.com/artsiom-sinitski" target="_blank">`github.com/artsiom-sinitski`</a> |
-- You can just grab their GitHub profile image URL
-- You should probably resize their picture using `?s=200` at the end of the image URL.
 
 ## FAQ
 
