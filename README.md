@@ -15,47 +15,44 @@ Predict Ethereum token price using time series forecasting LSTM Neural Network m
 
 ## Installation
 
-Install Anaconda 3 evironment
-Install the following packages:
+### Install Python 3.7+
+### Install the following Python packages:
 - Keras (DL high level framework)
 - Tensorflow (DL backend)
 - pandas (data manipulation)
 - scikit-learn (model crossvalidation)
 - matplotlib (data visualization)
 
-Install Python 3.7+
+### Install 
 
 ### Clone
 
 - Clone this repo to your local machine using `https://github.com/artsiom-sinitski/ETH_PricePrediction_Model.git`
 
-### Setup
-
-> update and install this package first
-
-```shell
-$ brew update
-$ brew install fvcproductions
-```
-
-> now install npm and bower packages
-
-```shell
-$ npm install
-$ bower install
-```
-
----
-
 ## Features
 
 ## Usage
 
+- First, prepare the data for the model. In the command line type: 
+```
+$> python prepData.py
+```
+- Second, train the model by running from the command line:
+```
+$> python trainModel.py default 120 1
+```
+--'default' is the name of your model
+-- '120' is the number of epochs for training
+-- '1' is number of batches
+- Third, make the model predict by running from the command line:
+```
+$> python predictPrice.py default 120 1
+```
 ## Team
 
 | <a href="https://github.com/artsiom-sinitski" target="_blank">**Artsiom Sinitski**</a> |
 | :---: |
-| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=100)](https://github.com/artsiom-sinitski)|
+| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=50)](https://github.com/artsiom-sinitski)|
 | <a href="https://github.com/artsiom-sinitski" target="_blank">`github.com/artsiom-sinitski`</a> |
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
