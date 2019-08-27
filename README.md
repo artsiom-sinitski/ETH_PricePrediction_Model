@@ -40,9 +40,9 @@ $> python prepData.py
 $> python trainModel.py default 120 1
 ```
 
-  'default' is the name of your model  
-  '120' is the number of epochs for training  
-  '1' is number of batches  
+      'default' is the name of your model  
+      '120' is the number of epochs for training  
+      '1' is number of batches  
 
 - Third, make the model predict by running from the command line:
 ```
