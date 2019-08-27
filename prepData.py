@@ -14,7 +14,7 @@ import numpy as np
 from matplotlib import pyplot
 
 
-def get_data(file='data/ETH-USD_prices.csv'):
+def get_data(file='data/ETH_USD-1_year.csv'):
     """
     Load Ethereum token prices data from a .csv file,
     and convert it to the correct form.
@@ -102,7 +102,8 @@ def split_train_test(X, Y, trs_len=0.80):
               20% of the data will be used for testing.
     """
     lx = len(X)
-    # train set will have 315 examples, test - 80
+    # 1 year train set - 315 examples,  test - 80.
+    # 3 year train set - 1167 examples, test - 294
     trs = int(lx * trs_len) - 1
     train_x, train_y = X[:trs], Y[:trs]
     test_x, test_y = X[trs:], Y[trs:]
@@ -112,7 +113,11 @@ def split_train_test(X, Y, trs_len=0.80):
 if __name__ == '__main__':
     # Here we want to first show how the "shifting" works
     # then graph our training and test data.
-    data = pd.read_csv('data/ETH-USD_prices.csv')
+    # x, y, yy = get_data()  ---> doesn't work, get the following error:
+    # "ValueError: not enough values to unpack (expected 3, got 2)""
+    # which is some bug in the Open CV implementation, (???)
+    # so need to duplicate the get_data() logic below
+    data = pd.read_csv('data/ETH_USD-3_year.csv')
     x, y = get_raw_xy(data)
     yy = get_vpo(y)
 

@@ -36,16 +36,15 @@ if __name__ == '__main__':
     # Get command line params
     name, epochs, batches, _ = get_params(script='predictPrice.py')
     model = confs[name]
-    mname = 'models/model-%s-%d-%d.h5 ' % (name, epochs, batches)
+    modelPath = 'models/model-%s-%d-%d.h5' % (name, epochs, batches)
 
     # Loading the model
-    if os.path.exists(mname):
-        model = load_model(mname)
+    if os.path.exists(modelPath):
+        model = load_model(modelPath)
         print('\n***** Model <%s> loaded! *****\n' % name)
     else:
-        print("Can't find %s model, train it first using 'trainModel.py %s %d %d'" % (mname, name, epochs, batches))
+        print("Can't find %s model, train it first using 'trainModel.py %s %d %d'" % (modelPath, name, epochs, batches))
 
-    # conacatenate feature arrays for Day_10 & Day_11
     p = np.array(to_predict[0])
     # Convert data into the "right" format.
     p = np.reshape(p, (batches, data_shape[0], data_shape[1]))
@@ -60,3 +59,4 @@ if __name__ == '__main__':
     print('Predicted: $%.2f' % x)
     print('   Actual: $%.2f' % c)
     print('    Error: $%.2f (%.2f%%)' % (x-c, abs((x-c)*100/c)) )
+

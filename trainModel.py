@@ -25,6 +25,7 @@ import numpy as np
 
 from keras.models import load_model, Sequential
 from keras.layers import Dense, LSTM
+from keras import regularizers as rgl
 
 from prepData import get_data, prep_data
 from matplotlib import pyplot
@@ -45,9 +46,14 @@ def get_lstm(batches, input_shape):
 
     When stateful is True we need to provide batch_input_shape.
     """
+
+    # Will stack layers on top of each other,
+    # so initialize the model as sequential.
     model = Sequential()
-    model.add(LSTM(64, input_shape=input_shape, stateful=True, batch_input_shape=(batches, input_shape[0], input_shape[1])))
-    model.add(Dense(1))
+    model.add( LSTM(64, input_shape=input_shape, stateful=True, batch_input_shape=(batches, input_shape[0], input_shape[1])) ) 
+    
+    model.add(Dense(1, kernel_regularizer=rgl.l2(0.01),                                        activity_regularizer=rgl.l1(0.01)))
+                #kernel_regularizer=regularizers.l2(0.01)
     return model
 
 
